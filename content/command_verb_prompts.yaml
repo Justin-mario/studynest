@@ -1,0 +1,13 @@
+# Practice-mode prompts for each command verb (FR-46).
+# Keyed by verb. The bank should be deep enough that the diagnostic and
+# practice modes can show fresh prompts on each attempt (FR-44).
+
+prompts:
+  describe: []
+  explain: []
+  analyse: []
+  evaluate: []
+  justify: []
+  discuss: []
+  compare: []
+  assess: []

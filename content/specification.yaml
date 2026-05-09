@@ -1,0 +1,22 @@
+# DSD specification: performance outcomes and assessment objectives.
+# Source of truth. Mirrored into the DB on startup.
+# Populate from the official Pearson DSD specification.
+
+specification:
+  name: T-Level DSD
+  version: "2024"
+
+assessment_objectives:
+  - code: AO1
+    description: Demonstrate knowledge and understanding.
+  - code: AO2
+    description: Apply knowledge and understanding.
+  - code: AO3
+    description: Analyse and evaluate information, ideas, and processes.
+
+performance_outcomes:
+  # TODO: populate from the official Pearson DSD specification.
+  # - code: PO1
+  #   title: ...
+  #   description: |
+  #     ...

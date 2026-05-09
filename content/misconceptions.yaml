@@ -1,0 +1,16 @@
+# Curated misconceptions library — used by ExplainIT (FR-53).
+# Each entry is grounded in real classroom observation, not generated.
+
+misconceptions: []
+# Example shape (do not commit until reviewed):
+# - external_id: req-analysis-functional-vs-quality
+#   topic_slug: requirements-analysis
+#   description: Confusing performance/usability requirements with functional ones.
+#   typical_response_pattern: |
+#     Student lists "the system must be fast" as a functional requirement.
+#   probing_questions:
+#     - "Could the system still 'work' without that? What does 'work' mean?"
+#     - "Where would 'must be fast' actually be tested?"
+#   correct_understanding: |
+#     Functional requirements describe what the system does; non-functional
+#     requirements (performance, reliability, usability) describe how well.

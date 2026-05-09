@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}StudyNest{% endblock %}</title>
+  <meta name="description" content="A specification-aligned learning tool for T-Level Digital Software Development students.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/htmx.org@2.0.3" defer></script>
+  <link rel="icon" href="data:,">
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+  {% block nav %}
+    {% if current_user.is_authenticated %}
+      {% include "partials/_nav_authenticated.html" %}
+    {% else %}
+      {% include "partials/_nav_public.html" %}
+    {% endif %}
+  {% endblock %}
+
+  <main id="main" class="mx-auto max-w-5xl px-4 py-8">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="mb-4 space-y-2">
+          {% for category, message in messages %}
+            <div class="rounded-md border border-slate-200 bg-white px-4 py-2 text-sm" role="status">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="mx-auto max-w-5xl px-4 py-8 text-sm text-slate-500">
+    StudyNest &middot; built for T-Level DSD
+  </footer>
+</body>
+</html>
