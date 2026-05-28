@@ -38,6 +38,16 @@ class Config:
     PROMPTS_DIR = BASE_DIR / "prompts"
     CONTENT_SYNC_ON_STARTUP = os.environ.get("CONTENT_SYNC_ON_STARTUP", "true").lower() == "true"
 
+    # Initial admin account — seeded on first startup if no user with this handle
+    # exists. After seeding, the admin can change handle and/or password via the
+    # account page; these env vars are NOT consulted again.
+    INITIAL_ADMIN_HANDLE = os.environ.get("INITIAL_ADMIN_HANDLE", "T-Level Tutor")
+    INITIAL_ADMIN_PASSWORD = os.environ.get("INITIAL_ADMIN_PASSWORD", "Best!Tutor@2026")
+
+    # In dev, create missing tables on startup. Production should rely on
+    # Alembic migrations and set this to false.
+    AUTO_CREATE_TABLES = os.environ.get("AUTO_CREATE_TABLES", "true").lower() == "true"
+
 
 class DevelopmentConfig(Config):
     DEBUG = True

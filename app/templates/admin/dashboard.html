@@ -2,9 +2,22 @@
 {% block title %}Admin &mdash; StudyNest{% endblock %}
 {% block content %}
 <div class="container" style="padding-top: 36px;">
-  <div class="t-eyebrow">Admin</div>
-  <h1 class="t-h1 mt-2">Cohort overview</h1>
-  <p class="t-body-lg mt-2" style="max-width: 640px;">Aggregate progress across your students. Pseudonymous by default.</p>
+  <div class="row" style="justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap;">
+    <div>
+      <div class="t-eyebrow">Admin</div>
+      <h1 class="t-h1 mt-2">Welcome, {{ current_user.handle }}.</h1>
+      <p class="t-body-lg mt-2" style="max-width: 640px;">
+        Aggregate progress across your students. Pseudonymous by default.
+      </p>
+    </div>
+    <div class="row gap-2" style="flex-wrap: wrap;">
+      <a class="btn btn-outline" href="{{ url_for('admin.students') }}">Students</a>
+      <a class="btn btn-outline" href="{{ url_for('auth.change_password') }}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        Account &amp; password
+      </a>
+    </div>
+  </div>
 
   <div class="tile-grid mt-8">
     <article class="card">
