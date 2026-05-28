@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Exam Technique &mdash; StudyNest{% endblock %}
+{% block content %}
+<div class="container" style="padding-top: 36px;">
+  <div class="t-eyebrow">Exam Technique</div>
+  <h1 class="t-h1 mt-2">Command Verbs</h1>
+  <p class="t-body-lg mt-2" style="max-width: 640px;">
+    Meta-skills that apply across every paper. More exam-technique features are planned.
+  </p>
+
+  <div class="mt-6">
+    <a class="btn btn-blue btn-lg" href="{{ url_for('exam_technique.command_verbs_index') }}">
+      Enter Command Verbs
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</div>
+{% endblock %}

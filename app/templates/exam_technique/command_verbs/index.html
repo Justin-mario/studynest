@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Command Verbs &mdash; StudyNest{% endblock %}
+{% block content %}
+<div class="container" style="padding-top: 36px;">
+  <div class="t-eyebrow">Exam Technique &middot; Command Verbs</div>
+  <h1 class="t-h1 mt-2">Pick a sub-feature</h1>
+
+  <div class="tile-grid mt-8">
+    <a class="card" href="{{ url_for('exam_technique.diagnostic') }}" style="padding: 24px; text-decoration: none;">
+      <div class="row gap-2"><span class="pill pill-blue">Diagnostic</span></div>
+      <h2 class="t-h3 mt-3">Where am I now?</h2>
+      <p class="t-small mt-2">A 10&ndash;12 prompt entry assessment. Repeatable.</p>
+    </a>
+    <a class="card" href="{{ url_for('exam_technique.verb_guide', verb='explain') }}" style="padding: 24px; text-decoration: none;">
+      <div class="row gap-2"><span class="pill pill-orange">Guide</span></div>
+      <h2 class="t-h3 mt-3">Verb-by-verb</h2>
+      <p class="t-small mt-2">Definitions, AO expectations, worked examples.</p>
+    </a>
+    <a class="card" href="{{ url_for('exam_technique.practice') }}" style="padding: 24px; text-decoration: none;">
+      <div class="row gap-2"><span class="pill pill-plum">Practice</span></div>
+      <h2 class="t-h3 mt-3">Drill</h2>
+      <p class="t-small mt-2">Write or speak responses. Verb- and AO-aware feedback.</p>
+    </a>
+    <a class="card" href="{{ url_for('exam_technique.quick_reference') }}" style="padding: 24px; text-decoration: none;">
+      <div class="row gap-2"><span class="pill pill-sun">Reference</span></div>
+      <h2 class="t-h3 mt-3">Quick reference</h2>
+      <p class="t-small mt-2">All verbs on one card.</p>
+    </a>
+  </div>
+</div>
+{% endblock %}

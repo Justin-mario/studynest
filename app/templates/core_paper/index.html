@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Core Paper &mdash; StudyNest{% endblock %}
+{% block content %}
+<div class="container" style="padding-top: 36px;">
+  <div class="t-eyebrow">Core Paper</div>
+  <h1 class="t-h1 mt-2">Core 1 &amp; Core 2 topics</h1>
+  <p class="t-body-lg mt-2" style="max-width: 640px;">
+    Topic-by-topic content, quizzes, and extended-response practice. Pick a paper to begin.
+  </p>
+
+  <div class="dashboard-grid mt-8">
+    <a class="card" href="{{ url_for('core_paper.paper', paper=1) }}" style="padding: 28px; text-decoration: none; transition: transform .15s ease;">
+      <div class="row gap-2"><span class="pill pill-blue">Core 1</span></div>
+      <h2 class="t-h2 mt-3">Software development principles</h2>
+      <p class="t-body mt-3">Networking, requirements, methodologies, testing.</p>
+    </a>
+    <a class="card" href="{{ url_for('core_paper.paper', paper=2) }}" style="padding: 28px; text-decoration: none;">
+      <div class="row gap-2"><span class="pill pill-orange">Core 2</span></div>
+      <h2 class="t-h2 mt-3">Software in context</h2>
+      <p class="t-body mt-3">Databases, security, ethics, professional practice.</p>
+    </a>
+  </div>
+</div>
+{% endblock %}

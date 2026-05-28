@@ -1,45 +1,312 @@
 {% extends "base.html" %}
 {% block title %}StudyNest &mdash; T-Level DSD study companion{% endblock %}
+
 {% block content %}
-<section class="py-12">
-  <h1 class="text-4xl font-bold tracking-tight">StudyNest</h1>
-  <p class="mt-3 max-w-2xl text-lg text-slate-700">
-    A specification-aligned learning tool for students taking the T-Level in
-    Digital Software Development. Every interaction is anchored to a specific
-    performance outcome and assessment objective.
-  </p>
-  <div class="mt-6">
-    <a href="{{ url_for('auth.sign_in') }}" class="inline-block rounded-md bg-slate-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-slate-700">
-      Sign in
-    </a>
+
+{# ── HERO ──────────────────────────────────────────────────────────── #}
+<section class="hero">
+  <div class="dot-bg dotgrid dotgrid-pulse"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="row gap-2" style="margin-bottom: 20px; flex-wrap: wrap;">
+        <span class="pill pill-blue">
+          <span style="width:6px; height:6px; background: var(--blue); border-radius: 999px; display: inline-block;"></span>
+          Built for the DSD specification
+        </span>
+        <span class="pill">Core 1 &middot; Core 2 &middot; ESP</span>
+      </div>
+
+      <h1 class="t-display">
+        Pass the paper.<br>
+        Not just <span class="t-serif-it" style="color: var(--blue);">plausible</span>.
+      </h1>
+
+      <p class="t-body-lg" style="margin-top: 24px; max-width: 560px;">
+        StudyNest is a study companion built around the
+        <span class="hl">T-Level Digital Software Development</span>
+        specification &mdash; every quiz, every prompt, every line of feedback is
+        anchored to a performance outcome and an assessment objective. So the
+        help you get is the help an examiner would actually reward.
+      </p>
+
+      <div class="row gap-3" style="margin-top: 32px; flex-wrap: wrap;">
+        <a class="btn btn-lg btn-primary" href="{{ url_for('auth.sign_in') }}">
+          <span>Start with Command Verbs</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-lg btn-outline" href="{{ url_for('auth.sign_in') }}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l11-7L7 5z"/></svg>
+          <span>See it in action</span>
+        </a>
+      </div>
+
+      <div class="row gap-6" style="margin-top: 28px; color: var(--muted); flex-wrap: wrap;">
+        <div class="row gap-2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          <span class="t-small">Free for FE colleges</span>
+        </div>
+        <div class="row gap-2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          <span class="t-small">No PII required</span>
+        </div>
+        <div class="row gap-2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          <span class="t-small">Voice input built-in</span>
+        </div>
+      </div>
+    </div>
+
+    {# ── Hero illustration: an animated study-nest scene ── #}
+    <div style="position: relative; aspect-ratio: 1 / 1; max-width: 520px; width: 100%; margin: 0 auto;">
+      <div class="hero-glow"></div>
+
+      <svg viewBox="0 0 520 520" style="width: 100%; height: 100%; position: relative; z-index: 1;" aria-label="StudyNest illustration of an open notebook with annotated study notes">
+        <defs>
+          <linearGradient id="paperShade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFFFFF"/>
+            <stop offset="100%" stop-color="#FBF7EB"/>
+          </linearGradient>
+          <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+            <feOffset dx="0" dy="4" result="off"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.18"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        {# Soft drop shadow under the stack #}
+        <ellipse cx="260" cy="480" rx="180" ry="14" fill="#14120D" opacity="0.08"/>
+
+        {# Back card (slightly rotated) — “revision papers” underneath #}
+        <g transform="rotate(-4 260 320)">
+          <rect x="78" y="232" width="364" height="220" rx="14" fill="#F3EEDF" stroke="#C9BFA4"/>
+          <line x1="110" y1="276" x2="290" y2="276" stroke="#C9BFA4" stroke-width="1.4"/>
+          <line x1="110" y1="298" x2="370" y2="298" stroke="#C9BFA4" stroke-width="1.4"/>
+          <line x1="110" y1="320" x2="320" y2="320" stroke="#C9BFA4" stroke-width="1.4"/>
+        </g>
+
+        {# Middle card (slight opposite rotation) #}
+        <g transform="rotate(2 260 320)" filter="url(#softShadow)">
+          <rect x="92" y="208" width="356" height="232" rx="14" fill="url(#paperShade)" stroke="#E2DAC4"/>
+          <text x="112" y="240" font-family="Geist Mono, monospace" font-size="11" letter-spacing="2" fill="#948A7B">PO3 · CORE 1</text>
+          <text x="112" y="270" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="600" fill="#14120D">Network protocols</text>
+          <line x1="112" y1="296" x2="412" y2="296" stroke="#E2DAC4" stroke-width="1"/>
+          <line x1="112" y1="320" x2="412" y2="320" stroke="#E2DAC4" stroke-width="1"/>
+          <line x1="112" y1="344" x2="380" y2="344" stroke="#E2DAC4" stroke-width="1"/>
+          <line x1="112" y1="368" x2="412" y2="368" stroke="#E2DAC4" stroke-width="1"/>
+          <line x1="112" y1="392" x2="340" y2="392" stroke="#E2DAC4" stroke-width="1"/>
+          <line x1="112" y1="416" x2="412" y2="416" stroke="#E2DAC4" stroke-width="1"/>
+        </g>
+
+        {# Foreground “open notebook” card #}
+        <g class="float-slow" filter="url(#softShadow)">
+          <rect x="64" y="78" width="392" height="298" rx="16" fill="#FFFFFF" stroke="#E2DAC4"/>
+
+          {# Spine dashed line down the middle #}
+          <line x1="260" y1="78" x2="260" y2="376" stroke="#E2DAC4" stroke-width="1" stroke-dasharray="4 4"/>
+
+          {# Left page — handwritten verb and pen strokes #}
+          <text x="86" y="118" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing="2" fill="#948A7B">VERB</text>
+          <text x="86" y="148" font-family="Bricolage Grotesque, sans-serif" font-size="32" font-weight="700" fill="#14120D" data-verb-word>explain</text>
+
+          {# Ruled lines on left page #}
+          <g stroke="#E2DAC4" stroke-width="1">
+            <line x1="86" y1="178" x2="240" y2="178"/>
+            <line x1="86" y1="206" x2="240" y2="206"/>
+            <line x1="86" y1="234" x2="240" y2="234"/>
+            <line x1="86" y1="262" x2="240" y2="262"/>
+            <line x1="86" y1="290" x2="220" y2="290"/>
+            <line x1="86" y1="318" x2="240" y2="318"/>
+          </g>
+
+          {# Pen-drawn underline beneath the verb #}
+          <path class="pen-stroke" d="M 86 165 q 40 -8 80 0 t 80 0" stroke="#2D5BFF" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+          {# Hand-drawn arrow from left page to right page #}
+          <path class="pen-stroke" d="M 100 220 q 40 -6 70 12 t 60 6" stroke="#FF6A2C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="226,240 240,238 232,250" fill="#FF6A2C"/>
+
+          {# Right page — exam-style answer with highlight #}
+          <text x="278" y="118" font-family="Geist Mono, monospace" font-size="10.5" letter-spacing="2" fill="#948A7B">ANSWER</text>
+
+          {# AO/Tier badges #}
+          <g transform="translate(278 134)">
+            <rect width="46" height="20" rx="10" fill="#DEE5FF"/>
+            <text x="23" y="14" font-family="Geist Mono, monospace" font-size="11" font-weight="600" fill="#1B3BB8" text-anchor="middle" data-ao>AO2</text>
+          </g>
+          <g transform="translate(330 134)">
+            <rect width="62" height="20" rx="10" fill="#F3EEDF" stroke="#E2DAC4"/>
+            <text x="31" y="14" font-family="Geist Mono, monospace" font-size="11" fill="#2A2620" text-anchor="middle" data-tier>Apply</text>
+          </g>
+
+          {# Marker-sweep highlight #}
+          <foreignObject x="278" y="178" width="160" height="22">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 14px; color: #14120D;">
+              <span class="marker-sweep marker-sweep-loop">why UDP wins</span>
+            </div>
+          </foreignObject>
+
+          {# Lines representing prose #}
+          <g stroke="#E2DAC4" stroke-width="1">
+            <line x1="278" y1="218" x2="430" y2="218"/>
+            <line x1="278" y1="240" x2="430" y2="240"/>
+            <line x1="278" y1="262" x2="410" y2="262"/>
+            <line x1="278" y1="284" x2="430" y2="284"/>
+            <line x1="278" y1="306" x2="395" y2="306"/>
+          </g>
+
+          {# Circled tick mark on right page #}
+          <circle class="pen-circle" cx="412" cy="345" r="18" stroke="#0F7A4E" stroke-width="2.4" fill="none"/>
+          <path d="M 402 345 L 410 353 L 422 339" stroke="#0F7A4E" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+
+        {# Verb pill — re-rendered by JS on a cycle #}
+        <foreignObject x="78" y="60" width="160" height="28">
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <span class="verb-cycle-pill" data-verb-pill>EXPLAIN</span>
+          </div>
+        </foreignObject>
+
+        {# Pen, tilted, slowly tipping #}
+        <g class="glyph-tip" transform="translate(380 36)">
+          <rect x="0" y="0" width="10" height="92" rx="3" fill="#2D5BFF" transform="rotate(28 5 46)"/>
+          <rect x="0" y="0" width="10" height="10" rx="2" fill="#1B3BB8" transform="rotate(28 5 46)"/>
+          <polygon points="5,96 0,108 10,108" fill="#14120D" transform="rotate(28 5 46)"/>
+        </g>
+
+        {# Floating sparkles #}
+        <g class="glyph-bob" transform="translate(38 110)">
+          <path d="M0 -10 L3 -3 L10 0 L3 3 L0 10 L-3 3 L-10 0 L-3 -3 Z" fill="#FFD84D"/>
+        </g>
+        <g class="float-slower" transform="translate(478 200)">
+          <path d="M0 -7 L2 -2 L7 0 L2 2 L0 7 L-2 2 L-7 0 L-2 -2 Z" fill="#2D5BFF"/>
+        </g>
+        <g class="glyph-bob" transform="translate(36 380)">
+          <path d="M0 -6 L2 -2 L6 0 L2 2 L0 6 L-2 2 L-6 0 L-2 -2 Z" fill="#FF6A2C"/>
+        </g>
+
+        {# Sticky-note tab top-right of the foreground card #}
+        <g class="float-slow" transform="translate(420 70)">
+          <rect width="62" height="34" rx="6" fill="#FFF1B5" stroke="#E2DAC4" transform="rotate(6 31 17)"/>
+          <text x="31" y="22" font-family="Geist Mono, monospace" font-size="10" font-weight="600" fill="#7A5A00" text-anchor="middle" transform="rotate(6 31 17)">PO3 · AO2</text>
+        </g>
+      </svg>
+    </div>
   </div>
 </section>
 
-<section class="grid gap-6 py-8 sm:grid-cols-2">
-  <div class="rounded-lg border border-slate-200 bg-white p-5">
-    <h2 class="font-semibold">Core Paper practice</h2>
-    <p class="mt-2 text-sm text-slate-600">Topic-by-topic content, quizzes, and extended-response practice mapped to Core 1 and Core 2.</p>
-  </div>
-  <div class="rounded-lg border border-slate-200 bg-white p-5">
-    <h2 class="font-semibold">Exam Technique</h2>
-    <p class="mt-2 text-sm text-slate-600">Command Verbs as a first-class skill. Diagnostic, verb-by-verb guides, drillable practice, quick reference.</p>
-  </div>
-  <div class="rounded-lg border border-slate-200 bg-white p-5">
-    <h2 class="font-semibold">ExplainIT</h2>
-    <p class="mt-2 text-sm text-slate-600">Teach a topic to a confused AI character that probes your explanations until you've shown genuine understanding.</p>
-  </div>
-  <div class="rounded-lg border border-slate-200 bg-white p-5">
-    <h2 class="font-semibold">Smart Revision</h2>
-    <p class="mt-2 text-sm text-slate-600">Mixed-topic quizzes and a spaced-repetition queue that surfaces what you're weakest on.</p>
+{# ── FEATURE CARDS ─────────────────────────────────────────────────── #}
+<section class="section" id="about">
+  <div class="t-eyebrow" style="margin-bottom: 12px;">What's inside</div>
+  <h2 class="t-h2" style="max-width: 720px; margin-bottom: 36px;">
+    Four sections, one philosophy: the help you get is
+    <span class="t-serif-it" style="color: var(--blue);">the help an examiner rewards</span>.
+  </h2>
+
+  <div class="feature-grid">
+    <div class="card">
+      <div class="row gap-2" style="margin-bottom: 14px;">
+        <span class="pill pill-blue">Core Paper</span>
+      </div>
+      <h3 class="t-h3">Core 1 &amp; Core 2 topic practice</h3>
+      <p class="t-body mt-2">Topic-by-topic concept content, mixed-format quizzes, and extended-response practice — every question mapped to a PO and AO.</p>
+    </div>
+
+    <div class="card">
+      <div class="row gap-2" style="margin-bottom: 14px;">
+        <span class="pill pill-orange">Exam Technique</span>
+      </div>
+      <h3 class="t-h3">Command Verbs, first-class</h3>
+      <p class="t-body mt-2">Diagnostic, verb-by-verb guides, drillable practice with voice input, and a one-page quick reference for the moments before an exam.</p>
+    </div>
+
+    <div class="card">
+      <div class="row gap-2" style="margin-bottom: 14px;">
+        <span class="pill pill-plum">ExplainIT</span>
+      </div>
+      <h3 class="t-h3">Teach a topic to Sam</h3>
+      <p class="t-body mt-2">A confused AI fellow-student probes your explanation until you've shown genuine understanding. Misconceptions curated from real classrooms.</p>
+    </div>
+
+    <div class="card">
+      <div class="row gap-2" style="margin-bottom: 14px;">
+        <span class="pill pill-green">Revision</span>
+      </div>
+      <h3 class="t-h3">Smart spaced repetition</h3>
+      <p class="t-body mt-2">Mixed-topic quizzes, past-question-style practice, and a queue that resurfaces the topics you're weakest on.</p>
+    </div>
+
+    <div class="card">
+      <div class="row gap-2" style="margin-bottom: 14px;">
+        <span class="pill pill-sun">Dashboard</span>
+      </div>
+      <h3 class="t-h3">A personalised next step</h3>
+      <p class="t-body mt-2">Mastery overview, weak spots, recent activity, and a soft consistency tracker. No punishing streaks, no fake XP.</p>
+    </div>
+
+    <div class="card">
+      <div class="row gap-2" style="margin-bottom: 14px;">
+        <span class="pill pill-rose">For lecturers</span>
+      </div>
+      <h3 class="t-h3">Cohort analytics, no PII</h3>
+      <p class="t-body mt-2">Aggregate progress per topic, students at risk, over-reliance flags. Pseudonymous accounts; real names visible only to admins.</p>
+    </div>
   </div>
 </section>
 
-<section class="py-8">
-  <h2 class="text-xl font-semibold">About this tool</h2>
-  <p class="mt-2 max-w-2xl text-sm text-slate-700">
-    StudyNest is built by an FE lecturer for FE students. It is not a generic AI
-    tutor. Every question, prompt, and feedback message is calibrated to what
-    DSD examiners reward.
-  </p>
+{# ── ANIMATED MASTERY STRIP ────────────────────────────────────────── #}
+<section class="section surface-warm" style="border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: none; padding: 64px 32px;">
+  <div class="container">
+    <div class="t-eyebrow" style="margin-bottom: 12px;">A typical week</div>
+    <h2 class="t-h2" style="margin-bottom: 28px; max-width: 760px;">Mastery moves &mdash; in the direction
+      <span class="t-serif-it" style="color: var(--blue);">you decide</span>.
+    </h2>
+
+    <div class="tile-grid">
+      <div class="card">
+        <div class="t-eyebrow">Core 1 · Networking</div>
+        <div style="font-family: var(--display); font-size: 38px; font-weight: 600; letter-spacing: -0.025em; margin-top: 4px; line-height: 1;">62<span style="font-size: 22px; color: var(--subtle);">%</span></div>
+        <div class="bar bar-blue bar-anim mt-3" style="--target: 62%;"><i></i></div>
+        <div class="t-small mt-3">+8 this week</div>
+      </div>
+      <div class="card">
+        <div class="t-eyebrow">Command verbs</div>
+        <div style="font-family: var(--display); font-size: 38px; font-weight: 600; letter-spacing: -0.025em; margin-top: 4px; line-height: 1;">74<span style="font-size: 22px; color: var(--subtle);">%</span></div>
+        <div class="bar bar-orange bar-anim mt-3" style="--target: 74%;"><i></i></div>
+        <div class="t-small mt-3">Analyse still a weak spot</div>
+      </div>
+      <div class="card">
+        <div class="t-eyebrow">ExplainIT sessions</div>
+        <div style="font-family: var(--display); font-size: 38px; font-weight: 600; letter-spacing: -0.025em; margin-top: 4px; line-height: 1;">5<span style="font-size: 22px; color: var(--subtle);"> / wk</span></div>
+        <div class="bar bar-green bar-anim mt-3" style="--target: 88%;"><i></i></div>
+        <div class="t-small mt-3">3 misconceptions resolved</div>
+      </div>
+    </div>
+  </div>
 </section>
+
+{# ── BLUE CTA ─────────────────────────────────────────────────────── #}
+<section class="cta">
+  <div class="dot-bg dotgrid"></div>
+  <div class="cta-inner">
+    <h2 class="t-h1" style="color: white; max-width: 760px;">
+      The exam doesn't reward effort. It rewards
+      <span class="t-serif-it" style="color: var(--sun);">specification-shaped answers</span>.
+    </h2>
+    <div class="row gap-3" style="flex-wrap: wrap;">
+      <a class="btn btn-lg" style="background: white; color: var(--blue-deep);" href="{{ url_for('auth.sign_in') }}">
+        <span>Try Command Verbs</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-lg" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.4);" href="{{ url_for('auth.sign_in') }}">
+        See dashboard
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/landing.js') }}" defer></script>
 {% endblock %}

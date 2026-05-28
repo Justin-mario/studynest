@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Revision &mdash; StudyNest{% endblock %}
+{% block content %}
+<div class="container" style="padding-top: 36px;">
+  <div class="t-eyebrow">Revision</div>
+  <h1 class="t-h1 mt-2">Three ways to revise</h1>
+  <p class="t-body-lg mt-2" style="max-width: 640px;">
+    Pick the kind of practice you need today.
+  </p>
+
+  <div class="tile-grid mt-8">
+    <a class="card" href="{{ url_for('revision.mixed_quizzes') }}" style="padding: 24px; text-decoration: none;">
+      <div class="row gap-2"><span class="pill pill-blue">Mixed</span></div>
+      <h2 class="t-h3 mt-3">Mixed quizzes</h2>
+      <p class="t-small mt-2">Cross-topic, weighted toward your weak spots.</p>
+    </a>
+    <a class="card" href="{{ url_for('revision.past_question_practice') }}" style="padding: 24px; text-decoration: none;">
+      <div class="row gap-2"><span class="pill pill-orange">Past-paper style</span></div>
+      <h2 class="t-h3 mt-3">Extended response</h2>
+      <p class="t-small mt-2">Mark-scheme-shaped feedback per AO.</p>
+    </a>
+    <a class="card" href="{{ url_for('revision.spaced_repetition') }}" style="padding: 24px; text-decoration: none;">
+      <div class="row gap-2"><span class="pill pill-green">Smart</span></div>
+      <h2 class="t-h3 mt-3">Spaced repetition</h2>
+      <p class="t-small mt-2">Items resurface at the right time.</p>
+    </a>
+  </div>
+</div>
+{% endblock %}
