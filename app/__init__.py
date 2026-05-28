@@ -22,6 +22,7 @@ def create_app(config_class: type | None = None) -> Flask:
     _init_extensions(app)
     _register_blueprints(app)
     _register_error_handlers(app)
+    _bootstrap_database(app)
     _maybe_sync_content(app)
 
     return app
@@ -69,6 +70,18 @@ def _register_error_handlers(app: Flask) -> None:
     @app.errorhandler(500)
     def server_error(_err):  # noqa: ANN001
         return render_template("errors/500.html"), 500
+
+
+def _bootstrap_database(app: Flask) -> None:
+    """Create tables (dev only) and seed the initial admin account."""
+    from .services.auth_seed import ensure_admin_account, ensure_tables
+
+    with app.app_context():
+        try:
+            ensure_tables()
+            ensure_admin_account()
+        except Exception:  # noqa: BLE001
+            app.logger.exception("Database bootstrap failed")
 
 
 def _maybe_sync_content(app: Flask) -> None:

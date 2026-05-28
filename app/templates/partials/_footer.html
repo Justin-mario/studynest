@@ -1,0 +1,42 @@
+{% from "partials/_logo.html" import logo %}
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-top">
+      <div class="footer-blurb">
+        <div class="brand" style="color: var(--paper); margin-bottom: 14px;">
+          {{ logo(28, mono=True) }}
+          <span class="brand-name" style="color: var(--paper);">StudyNest</span>
+        </div>
+        <p class="t-small" style="color: rgba(250,247,238,0.6);">
+          A specification-aware study companion for T-Level Digital Software
+          Development. Built by a working FE lecturer, for FE students.
+        </p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>The tool</h4>
+          <a href="{{ url_for('exam_technique.command_verbs_index') if current_user.is_authenticated else url_for('auth.sign_in') }}">Command Verbs</a>
+          <a href="{{ url_for('core_paper.index') if current_user.is_authenticated else url_for('auth.sign_in') }}">Core Paper</a>
+          <a href="{{ url_for('revision.index') if current_user.is_authenticated else url_for('auth.sign_in') }}">Revision</a>
+          <a href="{{ url_for('explainit.index') if current_user.is_authenticated else url_for('auth.sign_in') }}">ExplainIT</a>
+        </div>
+        <div class="footer-col">
+          <h4>For teachers</h4>
+          <a href="#">Cohort view</a>
+          <a href="#">Use in lessons</a>
+          <a href="#">Bring your own college</a>
+        </div>
+        <div class="footer-col">
+          <h4>The project</h4>
+          <a href="#">Requirements spec</a>
+          <a href="#">Pedagogical philosophy</a>
+          <a href="#">Changelog</a>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer-bottom">
+      <div>&copy; 2026 StudyNest &middot; MIT licence pending &middot; v0.1 pilot</div>
+      <div>Strode College &middot; Pearson T-Level DSD</div>
+    </div>
+  </div>
+</footer>

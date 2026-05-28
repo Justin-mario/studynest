@@ -1,22 +1,44 @@
-<header class="border-b border-slate-200 bg-white">
-  <nav class="mx-auto flex max-w-5xl flex-wrap items-center gap-4 px-4 py-3 text-sm" aria-label="Primary">
-    <a href="{{ url_for('dashboard.index') if current_user.role == 'student' else url_for('admin.index') }}" class="text-lg font-semibold">StudyNest</a>
-    {% if current_user.role == 'student' %}
-      <a href="{{ url_for('core_paper.index') }}" class="hover:underline">Core Paper</a>
-      <span class="text-slate-400" aria-hidden="true">ESP</span>
-      <span class="text-slate-400" aria-hidden="true">OS</span>
-      <a href="{{ url_for('revision.index') }}" class="hover:underline">Revision</a>
-      <a href="{{ url_for('explainit.index') }}" class="hover:underline">ExplainIT</a>
-      <a href="{{ url_for('exam_technique.index') }}" class="hover:underline">Exam Technique</a>
+{% from "partials/_logo.html" import logo %}
+<nav class="site-nav" aria-label="Primary">
+  <div class="site-nav-inner">
+    {% if current_user.role == 'admin' %}
+      <a class="brand" href="{{ url_for('admin.index') }}">
+        {{ logo(28) }}
+        <span class="brand-name">StudyNest</span>
+        <span class="pill pill-ink" style="font-size: 10.5px;">Admin</span>
+      </a>
+      <div class="site-nav-links">
+        <a href="{{ url_for('admin.index') }}">Overview</a>
+        <a href="{{ url_for('admin.cohorts') }}">Cohorts</a>
+        <a href="{{ url_for('admin.students') }}">Students</a>
+        <a href="{{ url_for('admin.analytics') }}">Analytics</a>
+        <a href="{{ url_for('admin.settings') }}">Settings</a>
+      </div>
     {% else %}
-      <a href="{{ url_for('admin.cohorts') }}" class="hover:underline">Cohorts</a>
-      <a href="{{ url_for('admin.students') }}" class="hover:underline">Students</a>
-      <a href="{{ url_for('admin.analytics') }}" class="hover:underline">Analytics</a>
-      <a href="{{ url_for('admin.settings') }}" class="hover:underline">Settings</a>
+      <a class="brand" href="{{ url_for('dashboard.index') }}">
+        {{ logo(28) }}
+        <span class="brand-name">StudyNest</span>
+      </a>
+      <div class="site-nav-links">
+        <a href="{{ url_for('dashboard.index') }}">Dashboard</a>
+        <a href="{{ url_for('core_paper.index') }}">Core Paper</a>
+        <a href="#" class="disabled" aria-disabled="true" title="Coming later">ESP</a>
+        <a href="#" class="disabled" aria-disabled="true" title="Coming later">OS</a>
+        <a href="{{ url_for('revision.index') }}">Revision</a>
+        <a href="{{ url_for('explainit.index') }}">ExplainIT</a>
+        <a href="{{ url_for('exam_technique.index') }}">Exam Technique</a>
+      </div>
     {% endif %}
-    <form method="post" action="{{ url_for('auth.sign_out') }}" class="ml-auto">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <button type="submit" class="text-slate-600 hover:underline">Sign out</button>
-    </form>
-  </nav>
-</header>
+    <div class="site-nav-right">
+      <span class="pill" title="Soft consistency indicator">
+        <span style="width:6px; height:6px; background: var(--tangerine); border-radius: 999px; display: inline-block;"></span>
+        4 of 7 days
+      </span>
+      <span class="t-small" style="color: var(--muted);">{{ current_user.handle }}</span>
+      <form method="post" action="{{ url_for('auth.sign_out') }}" style="display:inline;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn btn-sm btn-ghost">Sign out</button>
+      </form>
+    </div>
+  </div>
+</nav>

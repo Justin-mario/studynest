@@ -1,31 +1,98 @@
 {% extends "base.html" %}
 {% block title %}Dashboard &mdash; StudyNest{% endblock %}
 {% block content %}
-<section class="py-6">
-  <h1 class="text-2xl font-semibold">Hi, {{ user.handle }}.</h1>
-  <p class="mt-1 text-sm text-slate-600">Here's what to work on next.</p>
-</section>
+<div class="container" style="padding-top: 36px;">
+  <div class="t-eyebrow">Dashboard</div>
+  <h1 class="t-h1 mt-2">Hi, {{ user.handle }}.</h1>
+  <p class="t-body-lg mt-2" style="max-width: 640px;">
+    Here's what to work on next, based on what you've done this week.
+  </p>
 
-<section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-  <article class="rounded-lg border border-slate-200 bg-white p-5">
-    <h2 class="text-sm font-medium text-slate-500">Recommended next session</h2>
-    <p class="mt-2 text-base">{# FR-21 #}TODO: pick from weakest topic / due review / recent decline.</p>
-  </article>
-  <article class="rounded-lg border border-slate-200 bg-white p-5">
-    <h2 class="text-sm font-medium text-slate-500">Mastery overview</h2>
-    <p class="mt-2 text-sm text-slate-600">{# FR-22 #}TODO: per-topic mastery bars.</p>
-  </article>
-  <article class="rounded-lg border border-slate-200 bg-white p-5">
-    <h2 class="text-sm font-medium text-slate-500">Weak spots</h2>
-    <p class="mt-2 text-sm text-slate-600">{# FR-23 #}TODO: 3-5 flagged items.</p>
-  </article>
-  <article class="rounded-lg border border-slate-200 bg-white p-5">
-    <h2 class="text-sm font-medium text-slate-500">Recent activity</h2>
-    <p class="mt-2 text-sm text-slate-600">{# FR-24 #}TODO: last 4-5 sessions.</p>
-  </article>
-  <article class="rounded-lg border border-slate-200 bg-white p-5">
-    <h2 class="text-sm font-medium text-slate-500">Consistency</h2>
-    <p class="mt-2 text-sm text-slate-600">{# FR-25 #}TODO: soft consistency indicator.</p>
-  </article>
-</section>
+  <div class="dashboard-grid mt-8">
+    <article class="card" style="padding: 28px; position: relative; overflow: hidden;">
+      <div class="hero-glow" style="opacity: 0.5;"></div>
+      <div style="position: relative;">
+        <div class="t-eyebrow">Recommended next session</div>
+        <h2 class="t-h2 mt-2">Explain &mdash; Networking</h2>
+        <p class="t-body mt-3">
+          You've practised this verb twice this week with strong marks on AO1.
+          Try an <span class="hl-blue">AO2 application</span> question next.
+        </p>
+        <div class="row gap-3 mt-6" style="flex-wrap: wrap;">
+          <a class="btn btn-blue" href="{{ url_for('exam_technique.practice') }}">
+            Start a practice
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-outline" href="{{ url_for('explainit.index') }}">Teach Sam instead</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" style="padding: 24px;">
+      <div class="t-eyebrow">Mastery overview</div>
+      <div class="col gap-4 mt-4">
+        <div>
+          <div class="row" style="justify-content: space-between; margin-bottom: 6px;">
+            <span class="t-small" style="color: var(--ink);">Core 1 &middot; Networking</span>
+            <span class="t-mono" style="color: var(--muted);">62%</span>
+          </div>
+          <div class="bar bar-blue bar-anim" style="--target: 62%;"><i></i></div>
+        </div>
+        <div>
+          <div class="row" style="justify-content: space-between; margin-bottom: 6px;">
+            <span class="t-small" style="color: var(--ink);">Command verbs</span>
+            <span class="t-mono" style="color: var(--muted);">74%</span>
+          </div>
+          <div class="bar bar-orange bar-anim" style="--target: 74%;"><i></i></div>
+        </div>
+        <div>
+          <div class="row" style="justify-content: space-between; margin-bottom: 6px;">
+            <span class="t-small" style="color: var(--ink);">Core 2 &middot; Databases</span>
+            <span class="t-mono" style="color: var(--muted);">41%</span>
+          </div>
+          <div class="bar bar-green bar-anim" style="--target: 41%;"><i></i></div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="tile-grid mt-6">
+    <article class="card">
+      <div class="t-eyebrow">Weak spots</div>
+      <ul class="checks checks-tang mt-3">
+        <li><span class="t-body" style="color: var(--ink);">Evaluate</span> &mdash; 2 of last 5</li>
+        <li><span class="t-body" style="color: var(--ink);">Justify</span> &mdash; needs AO3 reasoning</li>
+        <li><span class="t-body" style="color: var(--ink);">SQL joins</span> &mdash; not attempted yet</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="t-eyebrow">Recent activity</div>
+      <div class="col gap-3 mt-3">
+        <div class="row gap-3">
+          <span class="pill pill-blue">Quiz</span>
+          <span class="t-small" style="color: var(--ink);">Network protocols &mdash; 7/10</span>
+        </div>
+        <div class="row gap-3">
+          <span class="pill pill-plum">ExplainIT</span>
+          <span class="t-small" style="color: var(--ink);">Requirements analysis &mdash; 14 turns</span>
+        </div>
+        <div class="row gap-3">
+          <span class="pill pill-orange">Practice</span>
+          <span class="t-small" style="color: var(--ink);">Explain (AO2) &mdash; strong</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="t-eyebrow">Consistency</div>
+      <div style="font-family: var(--display); font-size: 38px; font-weight: 600; margin-top: 4px; line-height: 1;">4<span style="font-size: 22px; color: var(--subtle);"> / 7 days</span></div>
+      <div class="t-small mt-3">No streak penalty &mdash; come back when you can.</div>
+    </article>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/landing.js') }}" defer></script>
 {% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ verb|title }} &mdash; StudyNest{% endblock %}
+{% block content %}
+<div class="container" style="padding-top: 36px;">
+  <div class="t-eyebrow">Command Verbs &middot; Guide</div>
+  <h1 class="t-h1 mt-2">{{ verb|title }}</h1>
+  <p class="t-body mt-3">Verb guide page for <strong>{{ verb }}</strong>.</p>
+</div>
+{% endblock %}
