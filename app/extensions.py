@@ -19,4 +19,12 @@ class Base(DeclarativeBase):
 db = SQLAlchemy(model_class=Base)
 csrf = CSRFProtect()
 login_manager = LoginManager()
-limiter = Limiter(key_func=get_remote_address, default_limits=[])
+
+# In-memory storage is fine for single-process dev; explicitly set so
+# Flask-Limiter doesn't warn at startup. For production at scale, swap
+# to Redis (set storage_uri to e.g. "redis://localhost:6379").
+limiter = Limiter(
+    key_func=get_remote_address,
+    default_limits=[],
+    storage_uri="memory://",
+)
