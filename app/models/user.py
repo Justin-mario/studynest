@@ -8,8 +8,7 @@ from typing import TYPE_CHECKING
 
 import bcrypt
 from flask_login import UserMixin
-from sqlalchemy import Boolean, DateTime, Enum, ForeignKey, String
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Boolean, DateTime, Enum, ForeignKey, String, Uuid
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..extensions import db
@@ -32,7 +31,7 @@ class User(UUIDPK, Timestamps, UserMixin, db.Model):
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
     role: Mapped[Role] = mapped_column(Enum(Role, name="user_role"), nullable=False, default=Role.student)
     cohort_id: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("cohorts.id", ondelete="SET NULL"), nullable=True
+        Uuid(), ForeignKey("cohorts.id", ondelete="SET NULL"), nullable=True
     )
     must_change_password: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)

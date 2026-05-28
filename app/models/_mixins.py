@@ -1,11 +1,15 @@
-"""Reusable model mixins."""
+"""Reusable model mixins.
+
+UUID and JSON columns use SQLAlchemy 2.x's portable types so the same models
+work on Postgres (native UUID + JSONB) and SQLite (CHAR(32) + TEXT) without
+code changes.
+"""
 from __future__ import annotations
 
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy import DateTime
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import DateTime, Uuid
 from sqlalchemy.orm import Mapped, mapped_column
 
 
@@ -15,7 +19,7 @@ def _utcnow() -> datetime:
 
 class UUIDPK:
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        Uuid(), primary_key=True, default=uuid.uuid4
     )
 
 

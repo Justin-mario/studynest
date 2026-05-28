@@ -3,8 +3,7 @@ from __future__ import annotations
 
 import enum
 
-from sqlalchemy import Enum, String, Text
-from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy import JSON, Enum, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from ..extensions import db
@@ -25,5 +24,5 @@ class CommandVerb(UUIDPK, db.Model):
         Enum(CommandVerbTier, name="command_verb_tier"), nullable=False
     )
     definition: Mapped[str] = mapped_column(Text, nullable=False)
-    expectations_by_ao: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    expectations_by_ao: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
     content_path: Mapped[str] = mapped_column(String(255), nullable=False)

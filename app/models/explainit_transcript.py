@@ -5,8 +5,7 @@ import enum
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, Enum, ForeignKey, Integer
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy import JSON, Boolean, DateTime, Enum, ForeignKey, Integer, Uuid
 from sqlalchemy.orm import Mapped, mapped_column
 
 from ..extensions import db
@@ -23,17 +22,17 @@ class ExplainItTranscript(UUIDPK, db.Model):
     __tablename__ = "explainit_transcripts"
 
     session_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("sessions.id", ondelete="CASCADE"), nullable=False, unique=True
+        Uuid(), ForeignKey("sessions.id", ondelete="CASCADE"), nullable=False, unique=True
     )
     user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
+        Uuid(), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
     )
     topic_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("topics.id", ondelete="CASCADE"), nullable=False
+        Uuid(), ForeignKey("topics.id", ondelete="CASCADE"), nullable=False
     )
-    misconceptions_planned: Mapped[list] = mapped_column(JSONB, nullable=False, default=list)
-    misconceptions_resolved: Mapped[list] = mapped_column(JSONB, nullable=False, default=list)
-    transcript: Mapped[list] = mapped_column(JSONB, nullable=False, default=list)
+    misconceptions_planned: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    misconceptions_resolved: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
+    transcript: Mapped[list] = mapped_column(JSON, nullable=False, default=list)
     completed: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     end_reason: Mapped[ExplainItEndReason] = mapped_column(
         Enum(ExplainItEndReason, name="explainit_end_reason"), nullable=False

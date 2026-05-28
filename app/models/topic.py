@@ -7,8 +7,7 @@ from __future__ import annotations
 import uuid
 from datetime import date, datetime
 
-from sqlalchemy import Boolean, Date, DateTime, ForeignKey, Integer, String, Text
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Boolean, Date, DateTime, ForeignKey, Integer, String, Text, Uuid
 from sqlalchemy.orm import Mapped, mapped_column
 
 from ..extensions import db
@@ -34,10 +33,10 @@ class TopicPOLink(db.Model):
     __tablename__ = "topic_po_links"
 
     topic_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("topics.id", ondelete="CASCADE"), primary_key=True
+        Uuid(), ForeignKey("topics.id", ondelete="CASCADE"), primary_key=True
     )
     performance_outcome_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(),
         ForeignKey("performance_outcomes.id", ondelete="CASCADE"),
         primary_key=True,
     )

@@ -4,8 +4,7 @@ from __future__ import annotations
 import uuid
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, String
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import ForeignKey, String, Uuid
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..extensions import db
@@ -21,7 +20,7 @@ class Cohort(UUIDPK, Timestamps, db.Model):
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     academic_year: Mapped[str] = mapped_column(String(16), nullable=False)
     created_by: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"), nullable=True
+        Uuid(), ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
 
     users: Mapped[list["User"]] = relationship(back_populates="cohort", foreign_keys="User.cohort_id")

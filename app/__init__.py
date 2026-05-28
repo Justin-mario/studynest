@@ -29,6 +29,8 @@ def create_app(config_class: type | None = None) -> Flask:
 
 
 def _init_extensions(app: Flask) -> None:
+    import uuid
+
     db.init_app(app)
     csrf.init_app(app)
     limiter.init_app(app)
@@ -40,7 +42,10 @@ def _init_extensions(app: Flask) -> None:
 
     @login_manager.user_loader
     def load_user(user_id: str) -> User | None:
-        return db.session.get(User, user_id)
+        try:
+            return db.session.get(User, uuid.UUID(user_id))
+        except (ValueError, TypeError):
+            return None
 
 
 def _register_blueprints(app: Flask) -> None:

@@ -5,8 +5,7 @@ import enum
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, Enum, ForeignKey
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy import JSON, DateTime, Enum, ForeignKey, Uuid
 from sqlalchemy.orm import Mapped, mapped_column
 
 from ..extensions import db
@@ -27,10 +26,10 @@ class Session(UUIDPK, db.Model):
     __tablename__ = "sessions"
 
     user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
+        Uuid(), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
     )
     type: Mapped[SessionType] = mapped_column(Enum(SessionType, name="session_type"), nullable=False)
-    context_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)
+    context_id: Mapped[uuid.UUID | None] = mapped_column(Uuid(), nullable=True)
     started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, index=True)
     ended_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
-    summary: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    summary: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)

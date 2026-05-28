@@ -16,14 +16,16 @@ load_dotenv(BASE_DIR / ".env")
 
 class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY", "dev-only-change-me")
+    # SQLite default keeps the file at project root so no `instance/` dir is
+    # needed; gitignored by *.db. For Postgres, set DATABASE_URL in .env.
     SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "DATABASE_URL", "sqlite:///" + str(BASE_DIR / "instance" / "studynest.db")
+        "DATABASE_URL", f"sqlite:///{BASE_DIR / 'studynest.db'}"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SESSION_COOKIE_SECURE = True
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = "Strict"
+    SESSION_COOKIE_SAMESITE = "Lax"
 
     SIGNIN_RATE_LIMIT = int(os.environ.get("SIGNIN_RATE_LIMIT", "5"))
     LLM_PER_USER_RATE_LIMIT = int(os.environ.get("LLM_PER_USER_RATE_LIMIT", "10"))
